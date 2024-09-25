@@ -1,8 +1,7 @@
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import Main from "./_component/Main";
 
 export default function Home() {
   return (
-    <Button asChild><Link href='/i/flow/login'>로그인</Link></Button>
+    <Main/>
   );
 }
