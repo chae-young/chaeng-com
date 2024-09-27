@@ -1,7 +1,13 @@
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import dayjs from "dayjs";
 import Link from "next/link";
+import relativeTime from "dayjs/plugin/relativeTime";
+dayjs.extend(relativeTime);
+import 'dayjs/locale/ko';
+import ActionButton from "../../_component/ActionButton";
+
+dayjs.locale('ko');
 
 export default function Post() {
     const target = {
@@ -28,6 +34,9 @@ export default function Post() {
             <CardContent>
                 사진.
             </CardContent>
+            <CardFooter>
+                <ActionButton/>
+            </CardFooter>
         </Card>
     )
 }
