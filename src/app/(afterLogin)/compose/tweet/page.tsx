@@ -1,6 +1,14 @@
 import Home from "../../home/page";
 
-export default function Page() {
+type Props = {
+  params: {
+    username: string,
+    id: string,
+    photoId: string,
+  }
+}
+export default function Page({params} : Props) {
+  console.log(params)
   return (
     <>
       <Home/>
