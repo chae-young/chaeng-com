@@ -8,10 +8,15 @@ import 'dayjs/locale/ko';
 import ActionButton from "../../_component/ActionButton";
 import PostArticle from "./PostArticle";
 import { faker} from '@faker-js/faker';
+import PhotoImages from "./PhotoImages";
 
 dayjs.locale('ko');
 
-export default function Post() {
+interface Props {
+    noImage?: boolean
+}
+
+export default function Post({noImage}: Props) {
     const target = {
         postId: 1,
         User: {
@@ -24,11 +29,25 @@ export default function Post() {
         images: [] as unknown as {imageId: number, link: string}[],
     }
 
-    if(Math.random() > 0.5) {
-        target.images.push({
-            imageId: 1,
-            link: faker.image.urlLoremFlickr(),
-        })
+    if(Math.random() > 0.5 && !noImage) {
+        target.images.push(
+            {
+                imageId: 1,
+                link: faker.image.urlLoremFlickr(),
+            },
+            {
+                imageId: 2,
+                link: faker.image.urlLoremFlickr(),
+            },
+            {
+                imageId: 3,
+                link: faker.image.urlLoremFlickr(),
+            },
+            {
+                imageId: 4,
+                link: faker.image.urlLoremFlickr(),
+            },
+        )
     }
     return(
         <PostArticle post={target}>
@@ -46,11 +65,7 @@ export default function Post() {
                 </CardTitle>
             </CardHeader>
             <CardContent>
-                {target.images && target.images.length > 0 && (
-                    <Link href={`/${target.User.id}/status/${target.postId}/photo/${target.images[0].imageId}`}>
-                        <img src={target.images[0].link} alt=""/>
-                    </Link>
-                )}
+                <PhotoImages post={target}/>
             </CardContent>
             <CardFooter>
                 <ActionButton/>

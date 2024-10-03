@@ -33,7 +33,7 @@ export default function NavMenu() {
             </header> */}
             
             <aside className="h-screen border-r bg-background">
-                <nav className="flex flex-col gap-4 px-2 sm:py-4 h-screen">
+                <nav className="flex flex-col h-screen gap-4 px-2 sm:py-4">
                     <Link
                         href="/home"
                         className="flex items-center gap-2 pl-2 hover:text-foreground"
@@ -48,6 +48,13 @@ export default function NavMenu() {
                         <DrawingPinIcon />
                         <span className={`${segment === 'profile' && 'font-bold'}`}>프로필</span>
                     </Link>
+                    <Link
+                        href="/messages"
+                        className="flex items-center gap-2 pl-2 hover:text-foreground"
+                    >
+                        <DrawingPinIcon />
+                        <span className={`${segment === 'messages' && 'font-bold'}`}>쪽지</span>
+                    </Link>                    
                     <Link
                         href="/explore"
                         className="flex items-center gap-2 pl-2 hover:text-foreground"

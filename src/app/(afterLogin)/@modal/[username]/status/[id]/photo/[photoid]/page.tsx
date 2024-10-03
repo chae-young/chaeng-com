@@ -14,22 +14,25 @@ export default function PhotoModal () {
     }
     return (
         <Dialog defaultOpen={true}>
-        <DialogContent>
+        <DialogContent className="h-screen max-w-screen">
             <DialogHeader className="text-3xl">
                 <DialogTitle>로그인</DialogTitle>
-            </DialogHeader>                
-            <div>
-                <img src={photo.link} alt=""/>
-                <ActionButton/>
-            </div>
-            <div>
-                <CommentForm/>
-                <div>
-                    <Post/>
-                    <Post/>
-                    <Post/>
+            </DialogHeader>
+            <div className="flex">
+                <div className="flex-[2_2_0%] h-screen">
+                    <img src={photo.link} alt="" className="w-full h-[80%] object-contain"/>
+                    <ActionButton/>
                 </div>
-            </div>
+                <div className="flex-1 h-screen overflow-y-auto">
+                    <Post noImage/>
+                    <CommentForm/>
+                    <div>
+                        <Post/>
+                        <Post/>
+                        <Post/>
+                    </div>
+                </div>
+            </div>                
         </DialogContent>
     </Dialog>      
     )
