@@ -11,10 +11,13 @@ export default function Main() {
                         Enter your email below to login to your account
                     </p>
                 </div>
-                <div className="mt-4 text-sm text-center">
+                <div className="flex justify-center gap-2 mt-4 text-sm text-center">
                     <Link href="/login" className="underline">
                         로그인
                     </Link>
+                    <Link href="/i/flow/signup" className="underline">
+                        회원가입
+                    </Link>                    
                 </div>
             </div>
         </div>
