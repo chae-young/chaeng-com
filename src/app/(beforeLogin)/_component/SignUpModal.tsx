@@ -1,49 +1,33 @@
+'use client';
+
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { redirect } from "next/navigation";
+import onSubmit from "@/app/(beforeLogin)/_lib/signup";
+import { useFormState, useFormStatus } from "react-dom";
+
+function showMessage(message: string) {
+    if(message === 'no_id') {
+        return '아이디를 입력하세요';
+    }
+    if(message === 'no_name') {
+        return '닉네임를 입력하세요';
+    }
+    if(message === 'no_password') {
+        return '비밀번호를 입력하세요';
+    }
+    if(message === 'no_image') {
+        return '프로필 이미지를 입력하세요';
+    }
+    return '';
+}
 
 export default function SignUpModal() {
-    const submit = async (formData: FormData) => {
-        'use server';
-        
-        if (!formData.get('id')){
-            return { message: 'no_id' };
-        }
-        if (!formData.get('name')){
-            return { message: 'no_name' };
-        }      
-        if (!formData.get('password')){
-            return { message: 'no_password' };
-        }
-        if (!formData.get('image')){
-            return { message: 'no_image' };
-        }
+    const [state, formAction] = useFormState(onSubmit, {message: ''}); // 초기 state
+    const { pending } = useFormStatus();
 
-        let shouldRedirect = false;
-
-        try{
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users`, {
-                method: 'POST',
-                body: formData,
-                credentials: 'include',
-            })
-
-            if(response.status === 403) {
-                return { message: 'already_exist' };
-            }
-
-            shouldRedirect = true;
-
-        }catch(err){
-            console.log(err)
-        }
-
-        if(shouldRedirect) {
-            return redirect('/login');
-        }
-    }
+    // const submit = onSubmit;
 
     return (
         <Dialog defaultOpen={true}>
@@ -51,11 +35,12 @@ export default function SignUpModal() {
                 <DialogHeader className="text-3xl">
                     <DialogTitle>회원가입</DialogTitle>
                 </DialogHeader>                
-                <form className="grid gap-4" action={submit}>
+                <form className="grid gap-4" action={formAction}>
                     <div className="grid gap-2">
                         <Label htmlFor="id">id</Label>
                         <Input
                             id="id"
+                            name="id"
                             type="text"
                             placeholder="아이디 입력"
                             required
@@ -65,6 +50,7 @@ export default function SignUpModal() {
                         <Label htmlFor="nickname">nickname</Label>
                         <Input
                             id="nickname"
+                            name="nickname"
                             type="text"
                             placeholder="닉네임 입력"
                             required
@@ -75,6 +61,7 @@ export default function SignUpModal() {
                         <Input
                             id="password"
                             type="password"
+                            name="password"
                             placeholder="비밀번호 입력"
                             required
                     />
@@ -83,14 +70,16 @@ export default function SignUpModal() {
                         <Label htmlFor="image">프로필 이미지</Label>
                         <Input
                             id="image"
+                            name="image"
                             type="file"
                             placeholder="비밀번호 입력"
                             required
                         />
                     </div>                                                      
                     <DialogFooter>
-                        <Button disabled>가입하기</Button>
-                    </DialogFooter>                
+                        <Button disabled={pending}>가입하기</Button>
+                    </DialogFooter>  
+                    <p className="text-red-600">{showMessage(state?.message as string)}</p>              
                 </form>
             </DialogContent>
         </Dialog>      

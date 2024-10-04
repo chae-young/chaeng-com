@@ -30,7 +30,7 @@ export const handlers = [
         // })
         return HttpResponse.text(JSON.stringify('ok'), {
             headers: {
-            'Set-Cookie': 'connect.sid=msw-cookie;HttpOnly;Path=/'
+                'Set-Cookie': 'connect.sid=msw-cookie;HttpOnly;Path=/'
             }
         })
     }),
