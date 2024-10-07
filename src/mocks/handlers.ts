@@ -29,9 +29,9 @@ export const handlers = [
         //   status: 403,
         // })
         return HttpResponse.text(JSON.stringify('ok'), {
-            headers: {
-                'Set-Cookie': 'connect.sid=msw-cookie;HttpOnly;Path=/'
-            }
+          headers: {
+            'Set-Cookie': 'connect.sid=msw-cookie;HttpOnly;Path=/'
+          }
         })
     }),
 ];

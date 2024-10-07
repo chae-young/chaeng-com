@@ -1,5 +1,6 @@
 "use server";
 
+import { signIn } from "@/auth";
 import { redirect } from "next/navigation";
 
 // eslint-disable-next-line import/no-anonymous-default-export, @typescript-eslint/no-explicit-any
@@ -25,19 +26,25 @@ export default async (previousState: any, formData: FormData) => {
             body: formData,
             credentials: 'include',
         })
-
+        console.log(response)
         if(response.status === 403) {
             return { message: 'already_exist' };
         }
 
+        // 회원가입 성공후 로그인
+        await signIn('credentials', {
+            username: formData.get('id'),
+            password: formData.get('password'),
+            redirect: false
+        })
         shouldRedirect = true;
-
+        
     }catch(err){
         console.log(err)
     }
 
     if(shouldRedirect) {
-        return redirect('/login');
+        return redirect('/home');
     }
 }
 

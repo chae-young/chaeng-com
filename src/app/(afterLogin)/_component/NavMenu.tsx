@@ -1,12 +1,29 @@
 'use client';
 
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { DrawingPinIcon } from "@radix-ui/react-icons";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useSelectedLayoutSegment } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function NavMenu() {
+    const router = useRouter();
+    const { data } = useSession();
     const segment = useSelectedLayoutSegment();
+    const onLogout = () => {
+        // client에서 로그아웃
+        signOut( {redirect: false} ).
+        then(() => {
+            router.replace('/')
+        })
+    }
+    console.log(data)
+    if(!data?.user) {
+        return null;
+    }
+
     return (
         <>
             {/* <header className="sticky top-0 z-30 flex items-center gap-4 px-4 border-b h-14 bg-background sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
@@ -33,7 +50,7 @@ export default function NavMenu() {
             </header> */}
             
             <aside className="h-screen border-r bg-background">
-                <nav className="flex flex-col h-screen gap-4 px-2 sm:py-4">
+                <nav className="fixed flex flex-col h-screen gap-4 px-2 sm:py-4">
                     <Link
                         href="/home"
                         className="flex items-center gap-2 pl-2 hover:text-foreground"
@@ -61,8 +78,15 @@ export default function NavMenu() {
                     >
                         <DrawingPinIcon />
                         <span className={`${segment === 'explore' && 'font-bold'}`}>탐색하기</span>
-                    </Link>                                                    
-                    <Button asChild className="mt-auto"><Link href="/compose/tweet">게시하기</Link></Button>            
+                    </Link>
+                    <div className="mt-auto">
+                        <Avatar>
+                            <AvatarImage src={data.user.image || ''} alt={data.user.name || ''} />
+                            <AvatarFallback>이건모에요</AvatarFallback>                    
+                        </Avatar>
+                        <Button variant="outline" className="w-full" onClick={onLogout}>로그아웃</Button>
+                        <Button asChild><Link href="/compose/tweet" className="w-full">게시하기</Link></Button>            
+                    </div>                                                    
                 </nav>
             </aside>        
         </>

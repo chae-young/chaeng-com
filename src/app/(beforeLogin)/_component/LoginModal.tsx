@@ -21,6 +21,7 @@ export default function LoginModal() {
                 password: password,
                 redirect: false
             })
+            
             router.replace('/home')
         }catch(err) {
             console.log(err)
