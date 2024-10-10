@@ -9,25 +9,17 @@ import ActionButton from "../../_component/ActionButton";
 import PostArticle from "./PostArticle";
 import { faker} from '@faker-js/faker';
 import PhotoImages from "./PhotoImages";
+import { PostType } from "@/model/Post";
 
 dayjs.locale('ko');
 
 interface Props {
-    noImage?: boolean
+    noImage?: boolean;
+    post: PostType;
 }
 
-export default function Post({noImage}: Props) {
-    const target = {
-        postId: 1,
-        User: {
-            id: 1,
-            nickname: 'shadcn',
-            image: ''
-        },
-        content: 'dsfdfsdfsd',
-        createdAt: new Date(),
-        images: [] as unknown as {imageId: number, link: string}[],
-    }
+export default function Post({noImage, post}: Props) {
+    const target = post;
 
     if(Math.random() > 0.5 && !noImage) {
         target.images.push(
