@@ -1,27 +1,18 @@
 'use client';
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import Trend from "./Trend";
 import { useQuery } from "@tanstack/react-query";
-import { usePathname } from "next/navigation";
-import { useSession } from "next-auth/react";
-import { getTrends } from "../_lib/getTrends";
 import { HashTag } from "@/model/HashTag";
+import { getTrends } from "../../_lib/getTrends";
+import Trend from "../../_component/Trend";
 
 export default function TrendSection() {
-  const pathname = usePathname();
-  const { data: session } = useSession();
-  
   const { data } = useQuery<HashTag[]>({
     queryKey: ['trends'],
     queryFn: getTrends,
     staleTime: 60 * 1000,
     gcTime: 300 * 1000,
-    enabled: !!session?.user
   })  
-
-
-  if(pathname === '/explore') return null;
-  if(!session?.user) return <>트렌드를 가져올수 없습니다.</>;
 
   return (
       <Card

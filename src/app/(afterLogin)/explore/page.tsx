@@ -1,6 +1,9 @@
+import TrendSection from "./_component/TrendSection";
 
-export default function Home() {
+export default function Explore() {
   return (
-    <>탐색</>
+    <>
+      <TrendSection />
+    </>
   );
 }
