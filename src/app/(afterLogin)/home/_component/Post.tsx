@@ -22,6 +22,7 @@ export default function Post({noImage, post}: Props) {
     const target = post;
 
     if(Math.random() > 0.5 && !noImage) {
+        target.images = [];
         target.images.push(
             {
                 imageId: 1,

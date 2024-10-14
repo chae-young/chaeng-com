@@ -1,18 +1,8 @@
+import { PostType } from "@/model/Post"
 import Link from "next/link"
 
 interface Props {
-    post: {
-        postId: number,
-        User: {
-            id: number,
-            nickname: string,
-            image: string,
-        },
-        content: string,
-        createdAt: Date,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        images: any[],
-    }
+    post: PostType
 }
 
 export default function PhotoImages ({post}: Props) {

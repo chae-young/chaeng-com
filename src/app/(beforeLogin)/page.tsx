@@ -6,7 +6,7 @@ export default async function BeforeLoginHome() {
   const session = await auth();
   if(session?.user) {
     redirect('/home');
-    return null;
+    // return null;
   }
   return (
     <Main/>

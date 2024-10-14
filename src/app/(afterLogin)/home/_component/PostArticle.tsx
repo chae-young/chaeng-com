@@ -1,21 +1,12 @@
 'use client';
 
 import { Card } from "@/components/ui/card";
+import { PostType } from "@/model/Post";
 import { useRouter } from "next/navigation";
 
 interface Props {
     children: React.ReactNode,
-    post: {
-        postId: number,
-        User: {
-            id: number,
-            nickname: string,
-            image: string,
-        },
-        content: string,
-        createdAt: Date,
-        images: unknown,
-    }
+    post: PostType
 }
 
 export default function PostArticle({children, post}: Props) {

@@ -19,7 +19,9 @@ interface Props {
 export default function TabProvider({children}: Props) {
     const [tab, setTab] = useState<'rec' | 'fol'>('rec');
 
-    <TabContext.Provider value={{tab, setTab}}>
-        {children}
-    </TabContext.Provider>
+    return (
+        <TabContext.Provider value={{tab, setTab}}>
+            {children}
+        </TabContext.Provider>
+    )
 }
