@@ -1,11 +1,9 @@
-import BackButton from "@/components/BackButton";
-import CommentForm from "./CommentForm";
-import Post from "@/app/(afterLogin)/home/_component/Post";
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
-import { getUserPosts } from "../../_lib/getUserPosts";
-import UserPosts from "../../_component/UserPosts";
-import { getUser } from "../../_lib/getUser";
-import UserInfo from "../../_component/UserInfo";
+import { getUser } from "./_lib/getUser";
+import { getUserPosts } from "./_lib/getUserPosts";
+import UserInfo from "./_component/UserInfo";
+import UserPosts from "./_component/UserPosts";
+
 
 interface Props {
   params: { username: string }
