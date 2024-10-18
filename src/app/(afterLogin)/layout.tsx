@@ -2,6 +2,7 @@ import FollowRecommended from "./_component/FollowRecommended";
 import NavMenu from "./_component/NavMenu";
 import RQProvider from "./_component/RQProvider";
 import TrendSection from "./_component/TrendSection";
+import RightSearhZone from "./search/_component/RightSearhZone";
 
 
 interface Props {
@@ -20,6 +21,7 @@ export default function AfterLoginLayout({ children, modal }: Props) {
                         {children}
                     </main>                    
                     <aside>
+                        <RightSearhZone />
                         <TrendSection/>
                         <section>
                             <h2>팔로우 추천</h2>
@@ -28,9 +30,9 @@ export default function AfterLoginLayout({ children, modal }: Props) {
                             </ul>
                         </section>
                     </aside>
+                    {modal}
                 </RQProvider>
             </div>
-            {modal}
         </>
     )
 }

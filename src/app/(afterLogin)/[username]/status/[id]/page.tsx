@@ -1,41 +1,35 @@
-import BackButton from "@/components/BackButton";
-import CommentForm from "./CommentForm";
-import Post from "@/app/(afterLogin)/home/_component/Post";
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
-import { getUserPosts } from "../../_lib/getUserPosts";
-import UserPosts from "../../_component/UserPosts";
-import { getUser } from "../../_lib/getUser";
-import UserInfo from "../../_component/UserInfo";
+import SinglePost from "./_component/SinglePost";
+import { getSinglePost } from "./_lib/getSinglePost";
+import { getComments } from "./_lib/getComments";
+import CommentForm from "./CommentForm";
+
 
 interface Props {
-  params: { username: string }
+  params: { id: string }
 }
 
-export default async function Profile( {params} : Props) {
-  const { username } = params;
+export default async function SinglePostPage( {params} : Props) {
+  const {id} = params;
+  // 서버 데이터 받아오기
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery({
-    queryKey: ['users', username],
-    queryFn: getUser,
+    queryKey: ['post', id],
+    queryFn: getSinglePost
   })
   await queryClient.prefetchQuery({
-    queryKey: ['posts','users', username],
-    queryFn: getUserPosts,
-  })
-
+    queryKey: ['post', id, 'comments'],
+    queryFn: getComments
+  })  
   const dehydratedState = dehydrate(queryClient);
 
-  return <>
+  return (
+    <section>
       <HydrationBoundary state={dehydratedState}>
-        <div className="flex">
-          <UserInfo username={username}/>
-          {/* <BackButton/>
-          <h2>게시하기</h2> */}
-        </div>
-        {/* <CommentForm/> */}
-        <div>
-          <UserPosts username={username}/>
-        </div>
+        <SinglePost id={id} />
+        
+        <CommentForm id={id} />
       </HydrationBoundary>
-  </>;
+    </section>
+  )
 }

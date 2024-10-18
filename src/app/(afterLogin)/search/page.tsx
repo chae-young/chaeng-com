@@ -1,3 +1,4 @@
+import RightSearhZone from "./_component/RightSearhZone";
 import SearchForm from "./_component/SearchForm";
 import SearchResult from "./_component/SearchResult";
 

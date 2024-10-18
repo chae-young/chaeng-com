@@ -3,7 +3,11 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { ImageIcon } from "@radix-ui/react-icons";
 
-export default function CommentForm() {
+interface Props {
+  id: string;
+}
+
+export default function CommentForm({id}: Props) {
     return (
         <form
         className="relative overflow-hidden border rounded-lg bg-background focus-within:ring-1 focus-within:ring-ring" x-chunk="dashboard-03-chunk-1"

@@ -47,7 +47,7 @@ export const handlers = [
       }
     })
   }),
-  http.get('/api/postRecommends', async ({ request }) => {
+  http.get('/api/postRecommends?cursor=0', async ({ request }) => {
     console.log('추천게시글');
     await delay(3000);
     console.log('딜레이 종료');

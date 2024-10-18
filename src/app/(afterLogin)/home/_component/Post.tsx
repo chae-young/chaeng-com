@@ -7,7 +7,6 @@ dayjs.extend(relativeTime);
 import 'dayjs/locale/ko';
 import ActionButton from "../../_component/ActionButton";
 import PostArticle from "./PostArticle";
-import { faker} from '@faker-js/faker';
 import PhotoImages from "./PhotoImages";
 import { PostType } from "@/model/Post";
 
@@ -20,28 +19,7 @@ interface Props {
 
 export default function Post({noImage, post}: Props) {
     const target = post;
-
-    if(Math.random() > 0.5 && !noImage) {
-        target.images = [];
-        target.images.push(
-            {
-                imageId: 1,
-                link: faker.image.urlLoremFlickr(),
-            },
-            {
-                imageId: 2,
-                link: faker.image.urlLoremFlickr(),
-            },
-            {
-                imageId: 3,
-                link: faker.image.urlLoremFlickr(),
-            },
-            {
-                imageId: 4,
-                link: faker.image.urlLoremFlickr(),
-            },
-        )
-    }
+    console.log(target)
     return(
         <PostArticle post={target}>
             <CardHeader>

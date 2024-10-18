@@ -59,7 +59,7 @@ export default function NavMenu() {
                         <span className={`${segment === 'home' && 'font-bold'}`}>홈</span>
                     </Link>                                
                     <Link
-                        href="/profile"
+                        href={`/${data.user.email}/profile}`}
                         className="flex items-center gap-2 pl-2 hover:text-foreground"
                     >
                         <DrawingPinIcon />
