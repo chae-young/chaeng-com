@@ -1,5 +1,5 @@
 export const getFollowingsPosts = async () => {
-    const res = await fetch('http://localhost:9090/api/followingPosts', {
+    const res = await fetch('http://localhost:9090/api/posts/followings', {
       next: {
         tags: ['posts','followings'],
       },

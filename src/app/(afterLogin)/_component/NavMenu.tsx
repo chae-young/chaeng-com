@@ -19,7 +19,6 @@ export default function NavMenu() {
             router.replace('/')
         })
     }
-    console.log(data)
     if(!data?.user) {
         return null;
     }
@@ -82,7 +81,7 @@ export default function NavMenu() {
                     <div className="mt-auto">
                         <Avatar>
                             <AvatarImage src={data.user.image || ''} alt={data.user.name || ''} />
-                            <AvatarFallback>이건모에요</AvatarFallback>                    
+                            <AvatarFallback>{data.user.name}</AvatarFallback>                    
                         </Avatar>
                         <Button variant="outline" className="w-full" onClick={onLogout}>로그아웃</Button>
                         <Button asChild><Link href="/compose/tweet" className="w-full">게시하기</Link></Button>            
